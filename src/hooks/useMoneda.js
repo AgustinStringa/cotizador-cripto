@@ -12,8 +12,8 @@ const Select = styled.select`
 display: block;
 padding: 1rem;
 border-radius: 1rem;
-font-size: 1.2rem;
-
+font-size: 1.3rem;
+-webkit-appearance: none;
 `;
 
 const useMoneda = (tituloLabel, stateInicial, MONEDAS) => {
@@ -23,17 +23,16 @@ const useMoneda = (tituloLabel, stateInicial, MONEDAS) => {
         setMoneda(evt.target.value);
     }
 
-    const Seleccionar = () => (
+    const SelectMoneda = () => (
         <>
             <Label htmlFor="">{tituloLabel}</Label>
             <Select name="moneda" id="" onChange={handleChange} value={moneda}>
-                <option value={"-Seleccione-"} disabled>-Seleccione-</option>
+                <option value={""} disabled>-Seleccione-</option>
                 {MONEDAS.map((moneda) => <option key={moneda.codigo} value={moneda.codigo}>{moneda.nombre}</option>)}
             </Select>
         </>
-    )
-
-    return [Seleccionar, moneda];
+    );
+    return [moneda, SelectMoneda];
 };
 
 export default useMoneda;

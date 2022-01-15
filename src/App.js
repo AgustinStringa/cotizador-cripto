@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import Form from './components/Form';
 import styled from '@emotion/styled';
 
@@ -21,12 +21,22 @@ margin-top: 3rem;
 }
 `
 function App() {
+  const [formData, setFormData] = useState(null);
+
+  useEffect(() => {
+    if (formData) {
+      console.log('simulando consulta con valores elegidos por el usuario');
+    } else {
+      console.log('nothing\'s happen');
+    }
+
+  }, [formData])
   return (
     <div className="container">
       <div className="image"></div>
       <div>
         <H1>Cotiza criptomonedas al instante</H1>
-        <Form></Form>
+        <Form setFormData={setFormData}></Form>
       </div>
     </div>
   );
