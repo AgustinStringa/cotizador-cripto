@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "@emotion/styled";
+import PropTypes from "prop-types";
 
 const ErrorStyle = styled.p`
   background-color: #b7322c;
@@ -13,9 +14,15 @@ const ErrorStyle = styled.p`
 const Error = ({ msg }) => {
   return (
     <div>
-      <ErrorStyle className="error">{msg}</ErrorStyle>
+      <ErrorStyle>{msg}</ErrorStyle>
     </div>
   );
+};
+/**
+ * mmsg: mensaje que se quiere presentar como error
+ */
+Error.propTypes = {
+  msg: PropTypes.string.isRequired,
 };
 
 export default Error;
