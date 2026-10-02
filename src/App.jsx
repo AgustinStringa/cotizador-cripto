@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import Form from './components/Form';
-import { Spinner } from '../shared';
+import { Spinner, Header, Footer } from '../shared';
 import CotizationCard from './components/CotizationCard';
 import styled from '@emotion/styled';
 import axios from "axios";
@@ -24,15 +24,6 @@ margin-top: 3rem;
 }
 `
 function App() {
-  /**
-   * formData -> state que maneja datos que vienen del componente Form
-   */
-  /**
-   * cotizacion -> state que maneja datos recibidos de la API
-   */
-  /**
-   * loadingData -> state para alternar animacion de carga
-   */
   const [formData, setFormData] = useState(null);
   const [cotization, setCotization] = useState(null);
   const [loadingData, setLoadingData] = useState(false);
@@ -43,7 +34,6 @@ function App() {
       const { monedaElegida, criptoElegida } = formData;
       const getCotizacion = async () => {
         const urlPriceQuery = `https://min-api.cryptocompare.com/data/pricemultifull?fsyms=${criptoElegida}&tsyms=${monedaElegida}`
-        //consultar cno datos del usuario en el state
         const resultUrlPrice = await axios.get(urlPriceQuery);
         const { data: { DISPLAY } } = resultUrlPrice;
         const dataCotizacion = DISPLAY[`${criptoElegida}`][`${monedaElegida}`];
@@ -59,14 +49,22 @@ function App() {
   }, [formData]);
 
   return (
-    <div className="container">
-      <div className="image"></div>
-      <div>
-        <H1>Cotiza criptomonedas al instante</H1>
-        <Form setFormData={setFormData}></Form>
-        {loadingData ? <Spinner variant="cubes" text="Cotizando criptomonedas..." /> : null}
-        {cotization && !loadingData ? <CotizationCard cotizacion={cotization}></CotizationCard> : null}
+    <div style={{ display: "flex", flexDirection: "column", minHeight: "100vh" }}>
+      <Header title="Cotizador Criptomonedas" variant="dark" />
+      <div className="container" style={{ flex: 1 }}>
+        <div className="image"></div>
+        <div>
+          <H1>Cotiza criptomonedas al instante</H1>
+          <Form setFormData={setFormData}></Form>
+          {loadingData ? <Spinner variant="cubes" text="Cotizando criptomonedas..." /> : null}
+          {cotization && !loadingData ? <CotizationCard cotizacion={cotization}></CotizationCard> : null}
+        </div>
       </div>
+      <Footer
+        title="Cotizador Criptomonedas"
+        description="Consulta las cotizaciones de las principales criptomonedas en tiempo real."
+        variant="dark"
+      />
     </div>
   );
 }

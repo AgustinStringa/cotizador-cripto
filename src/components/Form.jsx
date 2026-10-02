@@ -78,7 +78,7 @@ const Form = ({ setFormData }) => {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form onSubmit={handleSubmit} className="flex flex-col w-full gap-y-3">
       {error ? (
         <Error
           msg={"Selecciona ambos valores para obtener una cotizacion"}
