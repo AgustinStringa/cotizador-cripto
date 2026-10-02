@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import Form from './components/Form';
-import Spinner from './components/Spinner/Spinner';
+import { Spinner } from '../shared';
 import CotizationCard from './components/CotizationCard';
 import styled from '@emotion/styled';
 import axios from "axios";
@@ -64,7 +64,7 @@ function App() {
       <div>
         <H1>Cotiza criptomonedas al instante</H1>
         <Form setFormData={setFormData}></Form>
-        {loadingData ? <Spinner></Spinner> : null}
+        {loadingData ? <Spinner variant="cubes" text="Cotizando criptomonedas..." /> : null}
         {cotization && !loadingData ? <CotizationCard cotizacion={cotization}></CotizationCard> : null}
       </div>
     </div>
