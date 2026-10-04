@@ -1,70 +1,42 @@
-# Getting Started with Create React App
+# Cotizador de Criptomonedas
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Aplicación web desarrollada con **React** y **Vite** para consultar cotizaciones de criptomonedas en tiempo real frente a diferentes divisas internacionales.
 
-## Available Scripts
+## Descripción
 
-In the project directory, you can run:
+La aplicación permite al usuario seleccionar una divisa fiat (USD, MXN, EUR, GBP) y una criptomoneda del listado dinámico de las 10 principales criptomonedas del mercado (Bitcoin, Ethereum, etc.) para calcular la cotización instantánea.
 
-### `npm start`
+## Características principales
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+- **Integración con API pública:** Consulta la API de [CryptoCompare](https://min-api.cryptocompare.com/) para obtener:
+  - Las 10 criptomonedas con mayor capitalización de mercado.
+  - Precio actual, precio máximo y mínimo del día, variación porcentual de las últimas 24 horas y fecha de actualización.
+- **Custom Hooks:** Implementación de hooks personalizados (`useMoneda` y `useCripto`) para desacoplar el estado y el renderizado de los selectores del formulario.
+- **Feedback visual:** Indicador de carga animado (`Spinner`) y validación de campos obligatorios con mensajes de error.
+- **Componentes compartidos:** Integración de componentes unificados (`Header`, `Footer`, `Spinner`) del paquete compartido del workspace.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## Stack tecnológico
 
-### `npm test`
+- **React 17** (Hooks, Custom Hooks, Componentes funcionales)
+- **Vite** (Build tool y servidor de desarrollo ultrarrápido)
+- **Axios** (Cliente HTTP para consumo de API REST)
+- **Tailwind CSS v4** y **Emotion** (`@emotion/styled`) para el diseño y estilos modulares
+- **Vitest** y **Testing Library** para pruebas unitarias y de integración
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## Scripts disponibles
 
-### `npm run build`
+En el directorio del proyecto puedes ejecutar:
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+```bash
+# Iniciar servidor de desarrollo en http://localhost:5173
+npm start
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+# Compilar para producción
+npm run build
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+# Previsualizar el bundle de producción
+npm run preview
 
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+# Ejecutar tests con Vitest
+npm test -- --run
+```
