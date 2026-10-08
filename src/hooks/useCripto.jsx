@@ -1,21 +1,4 @@
 import React, { useState } from 'react';
-import styled from '@emotion/styled';
-
-const Label = styled.label`
-display: block;
-width: 100%;
-color: #fff;
-font-size: 2rem;
-margin: 1rem 0;
-`;
-const Select = styled.select`
-display: block;
-padding: 1rem;
-border-radius: 1rem;
-font-size: 1.3rem;
--webkit-appearance: none;
-
-`;
 /**
  * 
  * @param {*titulo para el label del select} labelText 
@@ -28,11 +11,11 @@ const useCripto = (labelText, criptoInicial, arrayCriptos) => {
 
     const SelectCriptos = () => (
         <>
-            <Label>{labelText}</Label>
-            <Select value={cripto} onChange={(evt) => { setCripto(evt.target.value) }}>
+            <label className="my-4 block w-full text-[2rem] text-white">{labelText}</label>
+            <select value={cripto} onChange={(evt) => { setCripto(evt.target.value) }} className="block appearance-none rounded-2xl p-4 text-[1.3rem]">
                 <option value={""} disabled>-Seleccione-</option>
                 {arrayCriptos.map((cripto) => <option key={cripto.CoinInfo.Id} value={cripto.CoinInfo.Name}>{cripto.CoinInfo.FullName}</option>)}
-            </Select>
+            </select>
         </>
     );
 

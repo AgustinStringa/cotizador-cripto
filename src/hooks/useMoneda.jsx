@@ -1,20 +1,4 @@
 import React, { useState } from 'react';
-import styled from '@emotion/styled';
-
-const Label = styled.label`
-display: block;
-width: 100%;
-color: #fff;
-font-size: 2rem;
-margin: 1rem 0;
-`;
-const Select = styled.select`
-display: block;
-padding: 1rem;
-border-radius: 1rem;
-font-size: 1.3rem;
--webkit-appearance: none;
-`;
 /**
  * 
  * @param {*titulo para el label del input} tituloLabel 
@@ -31,11 +15,11 @@ const useMoneda = (tituloLabel, stateInicial, MONEDAS) => {
 
     const SelectMoneda = () => (
         <>
-            <Label htmlFor="">{tituloLabel}</Label>
-            <Select name="moneda" id="" onChange={handleChange} value={moneda}>
+            <label htmlFor="" className="my-4 block w-full text-[2rem] text-white">{tituloLabel}</label>
+            <select name="moneda" id="" onChange={handleChange} value={moneda} className="block appearance-none rounded-2xl p-4 text-[1.3rem]">
                 <option value={""} disabled>-Seleccione-</option>
                 {MONEDAS.map((moneda) => <option key={moneda.codigo} value={moneda.codigo}>{moneda.nombre}</option>)}
-            </Select>
+            </select>
         </>
     );
     return [moneda, SelectMoneda];

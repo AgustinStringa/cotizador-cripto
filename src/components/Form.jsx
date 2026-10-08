@@ -4,20 +4,7 @@ import useMoneda from "../hooks/useMoneda";
 import useCripto from "../hooks/useCripto";
 import Error from "./Error";
 import PropTypes from "prop-types";
-import styled from "@emotion/styled";
 
-const Submit = styled.input`
-  width: 100%;
-  margin: 2rem 0;
-  border-radius: 1rem;
-  padding: 1rem;
-  outline: none;
-  border: none;
-  cursor: pointer;
-  font-size: 1.2rem;
-  background-color: rgb(104, 104, 212);
-  color: #fff;
-`;
 const Form = ({ setFormData }) => {
   const MONEDAS = [
     { codigo: "USD", nombre: "Dolar de Estados Unidos" },
@@ -91,7 +78,11 @@ const Form = ({ setFormData }) => {
         <SelectCripto></SelectCripto>
       </div>
       <div className="campo">
-        <Submit type="submit" value="Calcular" />
+        <input
+          type="submit"
+          value="Calcular"
+          className="my-8 w-full cursor-pointer rounded-2xl border-none bg-[rgb(104,104,212)] p-4 text-[1.2rem] text-white outline-none"
+        />
       </div>
     </form>
   );

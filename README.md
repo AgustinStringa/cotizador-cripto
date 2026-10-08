@@ -20,7 +20,7 @@ La aplicación permite al usuario seleccionar una divisa fiat (USD, MXN, EUR, GB
 - **React 17** (Hooks, Custom Hooks, Componentes funcionales)
 - **Vite** (Build tool y servidor de desarrollo ultrarrápido)
 - **Axios** (Cliente HTTP para consumo de API REST)
-- **Tailwind CSS v4** y **Emotion** (`@emotion/styled`) para el diseño y estilos modulares
+- **Tailwind CSS v4** para el diseño y estilos modulares
 - **Vitest** y **Testing Library** para pruebas unitarias y de integración
 
 ## Scripts disponibles

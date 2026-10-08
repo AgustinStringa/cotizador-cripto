@@ -2,27 +2,8 @@ import React, { useState, useEffect } from 'react';
 import Form from './components/Form';
 import { Spinner, Header, Footer } from '../shared';
 import CotizationCard from './components/CotizationCard';
-import styled from '@emotion/styled';
 import axios from "axios";
 
-const H1 = styled.h1`
-text-transform: uppercase;
-color: #fff;
-font-size: 3rem;
-margin-top: 3rem;
-@media (min-width: 992px){
-  margin-top: 0;
-}
-&::after{
-  content: '';
-  width: 40%;
-  height: 10px;
-  border-radius: 5px;
-
-  background-color: rgb(104, 104, 212);
-  display: block;
-}
-`
 function App() {
   const [formData, setFormData] = useState(null);
   const [cotization, setCotization] = useState(null);
@@ -49,12 +30,14 @@ function App() {
   }, [formData]);
 
   return (
-    <div style={{ display: "flex", flexDirection: "column", minHeight: "100vh" }}>
+    <div className="flex min-h-dvh flex-col">
       <Header title="Cotizador Criptomonedas" variant="dark" />
-      <div className="container" style={{ flex: 1 }}>
+      <div className="container flex-1">
         <div className="image"></div>
         <div>
-          <H1>Cotiza criptomonedas al instante</H1>
+          <h1 className="mt-12 text-[3rem] text-white uppercase min-[992px]:mt-0 after:block after:h-[10px] after:w-2/5 after:rounded-[5px] after:bg-[rgb(104,104,212)] after:content-['']">
+            Cotiza criptomonedas al instante
+          </h1>
           <Form setFormData={setFormData}></Form>
           {loadingData ? <Spinner variant="cubes" text="Cotizando criptomonedas..." /> : null}
           {cotization && !loadingData ? <CotizationCard cotizacion={cotization}></CotizationCard> : null}
