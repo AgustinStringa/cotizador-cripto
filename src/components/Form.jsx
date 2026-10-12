@@ -7,49 +7,43 @@ import PropTypes from "prop-types";
 
 const Form = ({ setFormData }) => {
   const MONEDAS = [
-    { codigo: "USD", nombre: "Dolar de Estados Unidos" },
+    { codigo: "USD", nombre: "Dólar de Estados Unidos" },
     { codigo: "MXN", nombre: "Peso Mexicano" },
     { codigo: "EUR", nombre: "Euro" },
     { codigo: "GBP", nombre: "Libra Esterlina" },
   ];
-  /**
-   * arrayOptionCripto: use State que trae los datos para el input select de la API
-   */
-  /**
-   * useMoneda y useCripto son custom hooks
-   * A su vez, cada uno retorna un state, en el cual se almacena el valor seleccionado por el usuario
-   * y un Select que es el componente o los datos HTML que se "ven en pantalla"
-   */
-  /**
-   * error -> useState que determina si el formulario puede ser enviado o no
-   */
-  const [arrayOptionCripto, setArrayOptionCripto] = useState(null); // STATE
+
+  const [arrayOptionCripto, setArrayOptionCripto] = useState(null);
   const [monedaElegida, SelectMoneda] = useMoneda(
-    "ELIGE TU MONEDA",
+    "Moneda Fiduciaria",
     "",
     MONEDAS
-  ); //CUSTOM HOOK
+  );
   const [criptoElegida, SelectCripto] = useCripto(
-    "ELIGE TU CRIPTOMONEDA",
+    "Criptomoneda",
     "",
     arrayOptionCripto ? arrayOptionCripto : []
-  ); //CUSTOM HOOK
+  );
   const [error, setError] = useState(false);
 
   useEffect(() => {
     const getCriptosByApi = async () => {
-      const url = `https://min-api.cryptocompare.com/data/top/mktcapfull?limit=10&tsym=USD`;
-      const response = await axios.get(url);
-      const {
-        data: { Data },
-      } = response;
-      setArrayOptionCripto(Data);
+      try {
+        const url = `https://min-api.cryptocompare.com/data/top/mktcapfull?limit=10&tsym=USD`;
+        const response = await axios.get(url);
+        const {
+          data: { Data },
+        } = response;
+        setArrayOptionCripto(Data);
+      } catch (err) {
+        console.error("Error al cargar criptomonedas:", err);
+      }
     };
 
     if (!arrayOptionCripto) {
       getCriptosByApi();
     }
-  }, []);
+  }, [arrayOptionCripto]);
 
   const handleSubmit = (evt) => {
     evt.preventDefault();
@@ -65,32 +59,36 @@ const Form = ({ setFormData }) => {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="flex flex-col w-full gap-y-3">
+    <form onSubmit={handleSubmit} className="space-y-4">
       {error ? (
-        <Error
-          msg={"Selecciona ambos valores para obtener una cotizacion"}
-        ></Error>
+        <Error msg="Selecciona ambos valores para obtener una cotización en tiempo real" />
       ) : null}
+
       <div className="campo">
-        <SelectMoneda></SelectMoneda>
+        <SelectMoneda />
       </div>
+
       <div className="campo">
-        <SelectCripto></SelectCripto>
+        <SelectCripto />
       </div>
-      <div className="campo">
-        <input
+
+      <div className="pt-2">
+        <button
           type="submit"
-          value="Calcular"
-          className="my-8 w-full cursor-pointer rounded-2xl border-none bg-[rgb(104,104,212)] p-4 text-[1.2rem] text-white outline-none"
-        />
+          className="inline-flex w-full cursor-pointer items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 py-3.5 px-6 font-bold text-white shadow-lg shadow-indigo-500/25 transition-all hover:-translate-y-0.5 hover:shadow-indigo-500/40 active:translate-y-0"
+        >
+          <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
+          </svg>
+          <span>Calcular Cotización</span>
+        </button>
       </div>
     </form>
   );
 };
-/**
- * setFormData -> funcion actualizadora de state que comunica datos del formulario con App.js
- */
+
 Form.propTypes = {
   setFormData: PropTypes.func.isRequired,
 };
+
 export default Form;
